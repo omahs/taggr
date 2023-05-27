@@ -140,9 +140,14 @@ fn index(host: &str, path: &str, title: &str, desc: &str) -> Option<(Headers, By
                     .replace(
                         r#"<meta name="mark" content="OG">"#,
                         &format!(
-                            r#"<meta content="https://{}/#/{}" property="og:url" />
-                               <meta content="{}" property="og:title" />
-                               <meta content="{}" property="og:description" />"#,
+                            r#"<meta content="https://{0}/#/{1}" property="og:url" />
+                               <link href="https://{0}/#/{1}" rel="canonical" />
+                               <title>{2}</title>
+                               <meta content="{3}" name="description" />
+                               <meta content="{2}" property="og:title" />
+                               <meta content="{3}" property="og:description" />
+                               <meta content="{2}" property="twitter:title" />
+                               <meta content="{3}" property="twitter:description" />"#,
                             host, path, title, &desc
                         ),
                     )
